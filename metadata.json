@@ -1,0 +1,8 @@
+{
+  "name": "和風茶飲點單與即時看板系統",
+  "description": "提供現場茶飲點購、購物車客製冰甜規格、實時排隊取餐狀態看板，以及管理者密碼鎖後台接單庫存調整之全功能茶飲點單系統，支援 Firebase 實時連線同步。",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

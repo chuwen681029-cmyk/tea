@@ -1,0 +1,72 @@
+{
+  "entities": {
+    "tea_item": {
+      "title": "Tea Item",
+      "description": "Represents an single tea beverage item available in the store",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "category": { "type": "string", "enum": ["和風茶", "和風日式複方茶", "厚奶茶"] },
+        "stock": { "type": "number" },
+        "isAvailable": { "type": "boolean" },
+        "sugar": { "type": "string" },
+        "caffeine": { "type": "string" },
+        "calories": { "type": "number" },
+        "tempOption": { "type": "string" },
+        "imageUrl": { "type": "string" }
+      },
+      "required": ["id", "name", "price", "category", "isAvailable"]
+    },
+    "order": {
+      "title": "Order",
+      "description": "Represents a tea drink order placed by a customer",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "deliveryMethod": { "type": "string", "enum": ["內用", "外帶"] },
+        "tableOrNote": { "type": "string" },
+        "items": {
+          "type": "array",
+          "description": "List of tea items ordered with details"
+        },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["Pending", "Preparing", "Completed", "Cancelled"] },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "customerName", "items", "totalAmount", "status", "createdAt"]
+    },
+    "admin_config": {
+      "title": "Admin Config",
+      "description": "Stores initial administrative password and settings, locked down by rules",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "passwordHash": { "type": "string" },
+        "isSetup": { "type": "boolean" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "passwordHash", "isSetup"]
+    }
+  },
+  "firestore": {
+    "tea_items/{teaId}": {
+      "schema": "tea_item",
+      "description": "Collection of tea menu beverages"
+    },
+    "orders/{orderId}": {
+      "schema": "order",
+      "description": "Collection of customer orders"
+    },
+    "admin_settings/{configId}": {
+      "schema": "admin_config",
+      "description": "Admin configuration containing salted-hashed admin password"
+    }
+  }
+}
